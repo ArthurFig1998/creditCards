@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row pad-left-right">
+      <span class="pull-left title">Credit Cards</span>
+      <button class="btn btn-success pull-right" [routerLink]="['new']">Add New Credit Card</button>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="center-panel">
+      <app-credit-card-item *ngFor="let credit-card of creditCards" [creditCard]="credit-card">
+      </app-credit-card-item>
+    </div>
+  </div>
+
+</div>
