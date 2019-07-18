@@ -1,3 +1,22 @@
-<p>
-  credit-card-detail works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h2> {{ creditCard?.name }}</h2>
+        <div class="pull-left">
+          <img [src]="creditCard?.url" [alt]="creditCard?.name" style="max-height: 100px;">
+        </div>
+        <div class="pull-right btn-toolbar centerbtns">
+          <a class="btn btn-primary" [routerLink]="['edit']">Edit</a>
+          <a class="btn btn-danger" (click)="onDelete()">Delete</a>
+        </div>
+      </div>
+      <div class="panel-body">
+        <span class="heading">Issuer: {{ creditCard?.issuer }}</span>
+        <br>
+        <span class="heading">Description: {{ creditCard?.description }}</span>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>

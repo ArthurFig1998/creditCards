@@ -12,20 +12,19 @@ export class CreditCardsService implements OnInit {
   creditCardChangeEvent = new Subject<CreditCard[]>();
   creditCardSelectedEvent = new EventEmitter<CreditCard[]>();
 
-  private creditCards: CreditCard[] = [];
+  private creditCards: CreditCard[];
   maxCreditCardId: number;
   currentId: number;
   newCreditCardId: number;
 
   constructor(private http: HttpClient) {
     this.getCreditCards();
-    console.log("credit-cards service constructor is being called");
   }
 
   getCreditCards() {
     this.http
       .get<{ message: string; creditCards: CreditCard[] }>(
-        "http://localhost:3000/creditCards"
+        "http://localhost:3000/creditCards/"
       )
       .subscribe(
         (response: any) => {
@@ -59,13 +58,16 @@ export class CreditCardsService implements OnInit {
     newCreditCard.id = "";
 
     this.http
-      .post("http://localhost:3000/creditCards/", newCreditCard, {
-        headers: headers
-      })
-      .subscribe((creditCards: CreditCard[]) => {
-        this.creditCards = creditCards;
+      .post<{ message: string; creditCard: CreditCard }>(
+        "http://localhost:3000/creditCards/",
+        newCreditCard,
+        {
+          headers: headers
+        }
+      )
+      .subscribe(responseData => {
+        this.creditCards.push(responseData.creditCard);
         this.creditCardChangeEvent.next(this.creditCards);
-        // this.getDocuments();
       });
   }
 
@@ -95,7 +97,6 @@ export class CreditCardsService implements OnInit {
         this.creditCards[pos] = newCreditCard;
         this.creditCardChangeEvent.next(this.creditCards);
       });
-    this.getCreditCards();
   }
 
   deleteCreditCard(creditCard: CreditCard) {
@@ -111,11 +112,9 @@ export class CreditCardsService implements OnInit {
     this.http
       .delete("http://localhost:3000/creditCards/" + creditCard.id)
       .subscribe((response: Response) => {
-        this.creditCards[pos] = creditCard;
+        this.creditCards.splice(pos, 1);
         this.creditCardChangeEvent.next(this.creditCards.slice());
       });
-
-    this.getCreditCards();
   }
 
   ngOnInit() {

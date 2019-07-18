@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 var index = require('./server/routes/app');
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ...
-const creditCardRoutes = require('./server/routes/credit-cards');
+const creditCardRoutes = require('./server/routes/creditCards');
 
 // establish a connection to the mongo database
 // *** Important *** change yourPort and yourDatabase
@@ -60,11 +60,11 @@ app.use(express.static(path.join(__dirname, 'dist/creditCards')));
 app.use('/', index);
 
 // ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
-app.use('/credit-cards', creditCardRoutes);
+app.use('/creditCards', creditCardRoutes);
 
 // Tell express to map all other non-defined routes back to the index page
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/cms/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/credit-cards/index.html'));
 });
 
 // Define the port address and tell express to use this port

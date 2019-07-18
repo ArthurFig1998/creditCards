@@ -9,18 +9,12 @@ import { CreditCardsService } from "../credit-cards.service";
   styleUrls: ["./credit-card-list.component.css"]
 })
 export class CreditCardListComponent implements OnInit, OnDestroy {
-  creditCards: CreditCard[] = [
-    {
-      id: "1",
-      name: "Chase Freedom",
-      description: "5X Rotation Categories",
-      issuer: "Chase",
-      url: "./assets/freedom_card_image.png"
-    }
-  ];
+  creditCards: CreditCard[];
   private subscription: Subscription;
 
-  constructor(private crediCardService: CreditCardsService) {}
+  constructor(private crediCardService: CreditCardsService) {
+    this.crediCardService.getCreditCards();
+  }
 
   ngOnInit() {
     this.subscription = this.crediCardService.creditCardChangeEvent.subscribe(
@@ -28,7 +22,6 @@ export class CreditCardListComponent implements OnInit, OnDestroy {
         this.creditCards = creditCardsList;
       }
     );
-    console.log(this.creditCards);
     this.crediCardService.getCreditCards();
   }
 

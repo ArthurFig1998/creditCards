@@ -3,19 +3,16 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema({
   id: {
-    type: String,
-    required: true
+    type: String
   },
   name: {
     type: String
   },
-  description: {
-    type: String,
-    required: true
-  },
   issuer: {
-    type: String,
-    required: true
+    type: String
+  },
+  description: {
+    type: String
   },
   url: {
     type: String

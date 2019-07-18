@@ -1,5 +1,5 @@
 var express = require('express');
-var CreditCard = require('../models/credit-card');
+var CreditCard = require('../models/creditCard');
 var router = express.Router();
 
 const sequenceGenerator = require('./sequenceGenerator');
@@ -8,7 +8,7 @@ const sequenceGenerator = require('./sequenceGenerator');
 function getCreditCards(req, res) {
   CreditCard.find().then(creditCards => {
       res.status(200).json({
-        message: "Documents fetched successfully!",
+        message: "Credit Cards fetched successfully!",
         creditCards: creditCards
       });
     })
@@ -29,7 +29,7 @@ function saveCreditCard(res, creditCard) {
   creditCard.save()
     .then(createdCreditCard => {
       res.status(201).json({
-        message: 'Document added successfully',
+        message: 'Credit Cards added successfully',
         creditCard: createdCreditCard
       });
     })
@@ -76,7 +76,7 @@ router.put('/:id', function (req, res, next) {
     creditCard.description = req.body.description;
     creditCard.url = req.body.url;
 
-    saveDocument(res, creditCard);
+    saveCreditCard(res, creditCard);
   })
 });
 
